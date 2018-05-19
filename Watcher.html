@@ -3,6 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style.css" type="text/css">
 	<script src="Playlist.js"></script>
 	<script src="VideoPlayerUtils.js"></script>
 </head>
@@ -12,6 +13,7 @@
 	<div>
 		<input id="input_files" type="file" multiple accept="video/*" />
 		<video id="videoPlayer" controls autoplay></video>
+        <div id="play_list"></div>
 		<button type="button" id="button_next">Next</button>
 		<button type="button" id="button_previous">Previous</button>
 		<button type="button" id="button_goto">Goto</button>
@@ -25,9 +27,41 @@
 		PlayVideo(videoPlayer, itemUrl);
 		htmlVideoNameElement.innerText = playlistItem.name;
 	}
+    
+    function DrawPlayList(files) {
+        play_list.innerHTML = "";
+        let i=0;
+        files.forEach( function() {
+            const liElt = document.createElement("li");
+            let name = files[i].name;
+            liElt.textContent = name;
+            play_list.append(liElt);
+            i++;
+            UpdatePlayList();
+        });
+        
+    }
+    
+    function UpdatePlayList() {
+        const elts = play_list.getElementsByTagName("li");
+        for(i=0;i<elts.length; i++) {
+            console.log(elts[i]);
+             if(elts[i].innerText == video_name.innerText) {
+                elts[i].className = "current";
+            }
+            else {
+                if (elts[i].className == "current") {
+                    elts[i].classList.remove("current");
+                    elts[i].className = "watched";
+                }    
+            }
+        }
+       
+    }
 
 	const input_files = document.getElementById("input_files");
 	const videoPlayer = document.getElementById("videoPlayer");
+    const play_list = document.getElementById("play_list");
 	const button_next = document.getElementById("button_next");
 	const button_previous = document.getElementById("button_previous");
 	const video_name = document.getElementById("video_name");
@@ -39,22 +73,27 @@
 		const files = Array.from(input_files.files);
 		currentPlaylist = new Playlist(files);
 		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
+        DrawPlayList(files);
 	});
 
 	button_previous.addEventListener("click", function (ev) {
 		currentPlaylist.Previous();
 		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
+        UpdatePlayList();
+       
 	});
 
 	button_next.addEventListener("click", function (ev) {
 		currentPlaylist.Next();
 		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
+        UpdatePlayList();
 	});
 
 	videoPlayer.addEventListener('ended', function () {
 		if (!currentPlaylist.IsLast()) {
 			currentPlaylist.Next();
 			PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
+            UpdatePlayList();
 		}
 	});
 
@@ -63,6 +102,7 @@
 		if (Number.isInteger(position)) {
 			currentPlaylist.SetPosition(position);
 			PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
+            UpdatePlayList();
 		}
 	});
 </script>

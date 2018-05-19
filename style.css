@@ -1,0 +1,19 @@
+#videoPlayer {
+    width: 100%;
+}
+
+#play_list {
+    width = 500px;
+    height: 100px;
+    background-color: rgba(0,0,0,70%);
+    color: white;
+}
+
+.current {
+    color: darkorange;
+    font-weight: bold;
+}
+
+.watched {
+    color: grey;
+}
