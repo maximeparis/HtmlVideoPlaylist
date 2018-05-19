@@ -4,9 +4,14 @@
 
 #play_list {
     width = 500px;
-    height: 100px;
+    min-height: 100px;
     background-color: rgba(0,0,0,70%);
     color: white;
+}
+
+#play_list .list {
+    border: 1px solid white;
+    padding: 5px;
 }
 
 .current {
