@@ -12,13 +12,19 @@
 #play_list .list {
     border: 1px solid white;
     padding: 5px;
+    padding-left: 15px;
 }
 
-.current {
+#play_list .current {
     color: darkorange;
     font-weight: bold;
 }
 
-.watched {
+#play_list .watched {
     color: grey;
+}
+
+#play_list a {
+    float: right;
+    padding-right: 10px;
 }

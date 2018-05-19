@@ -1,35 +1,32 @@
 function DrawPlayList(files) {
-        play_list.innerHTML = "";
-        let i=0;
-        files.forEach( function() {
-            const divElt = document.createElement("div");
-            const aElt = document.createElement("a");
-            aElt.innerText = "►";
-            let name = files[i].name;
-            divElt.textContent = name;
-            divElt.className = "list";
-            //liElt.append(aElt);
-            play_list.append(divElt);
-            i++;
-            UpdatePlayList();
-        });   
+    play_list.innerHTML = "";
+
+    for (let file of files) {
+        const divElt = document.createElement("div");
+        const aElt = document.createElement("a");
+        aElt.innerText = "►";
+        const name = file.name;
+        divElt.textContent = name;
+        divElt.className = "list";
+        //liElt.append(aElt);
+        play_list.append(divElt);
+        UpdatePlayList();
     }
-    
-    function UpdatePlayList() {
-        const elts = play_list.getElementsByClassName("list");
-        for(i=0;i<elts.length; i++) {
-             if(elts[i].innerText == video_name.innerText) {
-                 if (elts[i].classList.contains("watched")) {
-                     elts[i].classList.remove("watched");
-                 }
-                elts[i].classList.add("current");
+}
+
+function UpdatePlayList() {
+    const elts = play_list.getElementsByClassName("list");
+    for (let element of elts) {
+        if (element.innerText == video_name.innerText) {
+            if (element.classList.contains("watched")) {
+                element.classList.remove("watched");
             }
-            else {
-                if (elts[i].classList.contains("current")) {
-                    
-                    elts[i].classList.replace("current", "watched");
-                }    
+            element.classList.add("current");
+        }
+        else {
+            if (element.classList.contains("current")) {
+                element.classList.replace("current", "watched");
             }
         }
-       
     }
+}
