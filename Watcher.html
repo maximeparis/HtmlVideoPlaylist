@@ -1,16 +1,8 @@
-<!doctype hmlt>
+<!doctype html>
 <html lang="fr">
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script src="ArrayExtension.js"></script>
-	<script src="PointedList.js"></script>
-	<script src="Playlist.js"></script>
-	<script src="PlaylistsManager.js"></script>
-	<script src="MediaItem.js"></script>
-	<script src="VideoPlayer.js"></script>
 </head>
-
 <body>
 	<div id="video_name"></div>
 	<div>
@@ -22,62 +14,9 @@
 		<input type="number" id="input_goto" />
 	</div>
 </body>
-<script>
-	function CreateMediaItem(file, mediaItemCreatedCallback) {
-		const url = window.URL.createObjectURL(file);
-		const mediaItem = new MediaItem(url, file.name, file.size, 0);
-		const tempVideo = document.createElement('video');
-		tempVideo.preload = 'metadata';
-		tempVideo.onloadedmetadata = function () {
-			const duration = tempVideo.duration;
-			mediaItem.duration = duration;
-			mediaItemCreatedCallback(mediaItem);
-		}
-		tempVideo.src = url;
-	}
-
-	const input_files = document.getElementById("input_files");
-	const video_player = document.getElementById("video_player");
-	const button_next = document.getElementById("button_next");
-	const button_previous = document.getElementById("button_previous");
-	const video_name = document.getElementById("video_name");
-	const button_goto = document.getElementById("button_goto");
-	const input_goto = document.getElementById("input_goto");
-	const videoPlayer = new VideoPlayer(video_player);
-	let currentPlaylist = new Playlist("initialPlaylist", []);
-	videoPlayer.SetPlaylist(currentPlaylist);
-	const playlistManager = new PlaylistsManager();
-	playlistManager.Add(currentPlaylist);
-
-	input_files.addEventListener("change", function (ev) {
-		const files = Array.from(input_files.files);
-		for (let file of files) {
-			CreateMediaItem(file, function (mediaItem) {
-				currentPlaylist.AddMediaItems(mediaItem);
-				if (currentPlaylist.mediaItems.length == files.length) {
-					videoPlayer.Resume();
-				}
-			});
-		}
-	});
-
-	button_previous.addEventListener("click", function (ev) {
-		currentPlaylist.Previous();
-		videoPlayer.PlayCurrent();
-	});
-
-	button_next.addEventListener("click", function (ev) {
-		currentPlaylist.Next();
-		videoPlayer.PlayCurrent();
-	});
-
-	button_goto.addEventListener('click', function () {
-		const position = parseInt(input_goto.value);
-		if (Number.isInteger(position)) {
-			currentPlaylist.SetPosition(position);
-			videoPlayer.PlayCurrent();
-		}
-	});
-</script>
-
+<script src="ArrayExtension.js"></script>
+<script src="Playlist.js"></script>
+<script src="MediaItem.js"></script>
+<script src="VideoPlayer.js"></script>
+<script src="EntryPoint.js"></script>
 </html>

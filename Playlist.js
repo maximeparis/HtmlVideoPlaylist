@@ -6,7 +6,7 @@ class Playlist {
 		this.mediaItems = [];
 	}
 	AddMediaItems(items) {
-		this.mediaItems.push(items);
+		this.mediaItems.push(...items);
 	}
 	RemoveMediaItem(names){
 		if(!Array.isArray(names))
@@ -21,7 +21,10 @@ class Playlist {
 	IsLast() { return this.position == (this.mediaItems.length - 1); }
 	Reset() { this.position = 0; }
 	IsFirst() { return this.position == 0; }
-	Current() { return this.mediaItems[this.position]; }
+	Current() { 
+		this.SetPosition(this.position);
+		return this.mediaItems[this.position]; 
+	}
 	Next() {
 		if (this.IsLast() && this.isCircular) {
 			this.SetPosition(0);
