@@ -1,21 +1,30 @@
 class Playlist {
-	constructor(items) {
-		if (!Array.isArray(items))
-			throw new Error("Items of playlist must be an array of item")
-		this.items = items;
+	constructor(id) {
 		this.position = 0;
 		this.isCircular = false;
-		this.firstPlay = true;
+		this.id = id;
+		this.mediaItems = [];
+	}
+	AddMediaItems(items) {
+		this.mediaItems.push(...items);
+	}
+	RemoveMediaItem(names){
+		if(!Array.isArray(names))
+			throw new Error("names must be an array");
+		this.mediaItems.remove((mi, idx) => names.exists(name => mi.name == name));
 	}
 	ToggleCircular() { this.isCircular = !this.isCircular; }
 	IsCircular() { return this.isCircular };
 	SetPosition(index) {
-		this.position = Math.max(0, Math.min(index, this.items.length - 1))
+		this.position = Math.max(0, Math.min(index, this.mediaItems.length - 1))
 	}
-	IsLast() { return this.position == (this.items.length - 1); }
-	Reset(){ this.position = 0; }
+	IsLast() { return this.position == (this.mediaItems.length - 1); }
+	Reset() { this.position = 0; }
 	IsFirst() { return this.position == 0; }
-	Current(){ return this.items[this.position];}
+	Current() { 
+		this.SetPosition(this.position);
+		return this.mediaItems[this.position]; 
+	}
 	Next() {
 		if (this.IsLast() && this.isCircular) {
 			this.SetPosition(0);
@@ -26,7 +35,7 @@ class Playlist {
 	}
 	Previous() {
 		if (this.IsFirst() && this.isCircular) {
-			this.SetPosition(this.items.length - 1);
+			this.SetPosition(this.mediaItems.length - 1);
 		}
 		else {
 			this.SetPosition(this.position - 1);

@@ -1,19 +1,14 @@
-<!doctype hmlt>
+<!doctype html>
 <html lang="fr">
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="style.css" type="text/css">
-	<script src="Playlist.js"></script>
-	<script src="VideoPlayerUtils.js"></script>
-    <script src="DrawPlayList.js"></script>
 </head>
-
 <body>
 	<div id="video_name"></div>
 	<div>
-		<input id="input_files" type="file" multiple accept="video/*" />
-		<video id="videoPlayer" controls autoplay></video>
+		<input id="input_files" type="file" multiple accept="video/mp4"/>
+		<video id="video_player" controls autoplay></video>
         <div id="play_list"></div>
 		<button type="button" id="button_next">Next</button>
 		<button type="button" id="button_previous">Previous</button>
@@ -21,61 +16,14 @@
 		<input type="number" id="input_goto" />
 	</div>
 </body>
-<script>
-	function PlayCurrentPlaylistItem(playlist, videoPlayer, htmlVideoNameElement) {
-		const playlistItem = playlist.Current();
-		const itemUrl = URL.createObjectURL(playlistItem);
-		PlayVideo(videoPlayer, itemUrl);
-		htmlVideoNameElement.innerText = playlistItem.name;
-	}
-    
-
-	const input_files = document.getElementById("input_files");
-	const videoPlayer = document.getElementById("videoPlayer");
-    const play_list = document.getElementById("play_list");
-	const button_next = document.getElementById("button_next");
-	const button_previous = document.getElementById("button_previous");
-	const video_name = document.getElementById("video_name");
-	const button_goto = document.getElementById("button_goto");
-	const input_goto = document.getElementById("input_goto");
-	let currentPlaylist = new Playlist([]);
-
-	input_files.addEventListener("change", function (ev) {
-		const files = Array.from(input_files.files);
-		currentPlaylist = new Playlist(files);
-		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
-        DrawPlayList(files);
-	});
-
-	button_previous.addEventListener("click", function (ev) {
-		currentPlaylist.Previous();
-		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
-        UpdatePlayList();
-       
-	});
-
-	button_next.addEventListener("click", function (ev) {
-		currentPlaylist.Next();
-		PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
-        UpdatePlayList();
-	});
-
-	videoPlayer.addEventListener('ended', function () {
-		if (!currentPlaylist.IsLast()) {
-			currentPlaylist.Next();
-			PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
-            UpdatePlayList();
-		}
-	});
-
-	button_goto.addEventListener('click', function () {
-		const position = parseInt(input_goto.value);
-		if (Number.isInteger(position)) {
-			currentPlaylist.SetPosition(position);
-			PlayCurrentPlaylistItem(currentPlaylist, videoPlayer, video_name);
-            UpdatePlayList();
-		}
-	});
-</script>
-
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="ArrayExtension.js"></script>
+<script src="Playlist.js"></script>
+<script src="MediaItem.js"></script>
+<script src="VideoPlayer.js"></script>
+<script src="EntryPoint.js"></script>
+<script src="DrawPlayList.js"></script>
 </html>

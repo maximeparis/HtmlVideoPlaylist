@@ -1,4 +1,4 @@
-#videoPlayer {
+#video_player {
     width: 100%;
 }
 
@@ -9,10 +9,14 @@
     color: white;
 }
 
-#play_list .list {
+#play_list div {
     border: 1px solid white;
     padding: 5px;
     padding-left: 15px;
+}
+
+#play_list #remove_button {
+    float: right;
 }
 
 #play_list .current {
