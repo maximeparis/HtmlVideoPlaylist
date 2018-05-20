@@ -12,4 +12,6 @@ Array.prototype.exists = function (pred) {
 		if (pred(item))
 			return true;
 	}
+
+	return false;
 };

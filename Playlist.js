@@ -11,7 +11,7 @@ class Playlist {
 	RemoveMediaItem(names){
 		if(!Array.isArray(names))
 			throw new Error("names must be an array");
-		this.mediaItems.remove(function(mi, idx){ return names.exists(name => mi.name == name)});
+		this.mediaItems.remove((mi, idx) => names.exists(name => mi.name == name));
 	}
 	ToggleCircular() { this.isCircular = !this.isCircular; }
 	IsCircular() { return this.isCircular };
