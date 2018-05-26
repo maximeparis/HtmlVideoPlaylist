@@ -1,0 +1,34 @@
+#video_player {
+    width: 100%;
+}
+
+#play_list {
+    width = 500px;
+    min-height: 100px;
+    background-color: rgba(0,0,0,70%);
+    color: white;
+}
+
+#play_list div {
+    border: 1px solid white;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+#play_list #remove_button {
+    float: right;
+}
+
+#play_list .current {
+    color: darkorange;
+    font-weight: bold;
+}
+
+#play_list .watched {
+    color: grey;
+}
+
+#play_list a {
+    float: right;
+    padding-right: 10px;
+}

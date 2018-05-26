@@ -14,20 +14,24 @@ input_files.addEventListener("change", function (ev) {
 	MediaItem.CreateFromFiles(files, function (mediaItems) {
 		playlist.AddMediaItems(mediaItems);
 		videoPlayer.Play();
+        DrawPlayList(files);
 	});
 });
 
 button_previous.addEventListener("click", function (ev) {
 	videoPlayer.Previous();
+    UpdatePlayList();
 });
 
 button_next.addEventListener("click", function (ev) {
 	videoPlayer.Next();
+    UpdatePlayList();
 });
 
 button_goto.addEventListener('click', function () {
 	const position = parseInt(input_goto.value);
 	if (Number.isInteger(position)) {
 		videoPlayer.SetPosition(position);
+        UpdatePlayList();
 	}
 });
