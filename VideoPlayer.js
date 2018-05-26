@@ -42,19 +42,25 @@ class VideoPlayer {
 	Next() {
 		this.playlist.Next();
 		const mediaItem = this.playlist.Current();
-		this.player.src = mediaItem.url;
-		this.Play();
+		if (mediaItem) {
+			this.player.src = mediaItem.url;
+			this.Play();
+		}
 	}
 	Previous() {
 		this.playlist.Previous();
 		const mediaItem = this.playlist.Current();
-		this.player.src = mediaItem.url;
-		this.Play();
+		if (mediaItem) {
+			this.player.src = mediaItem.url;
+			this.Play();
+		}
 	}
-	SetPosition(position){
+	SetPosition(position) {
 		this.playlist.SetPosition(position);
 		const mediaItem = this.playlist.Current();
-		this.player.src = mediaItem.url;
-		this.Play();
+		if (mediaItem) {
+			this.player.src = mediaItem.url;
+			this.Play();
+		}
 	}
 }
