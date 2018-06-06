@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css\style.css" type="text/css">
+</head>
+<body>
+	<div id="video_name"></div>
+	<div>
+		<input id="input_files" type="file" multiple accept="video/mp4"/>
+		<video id="video_player" controls autoplay></video>
+        <div id="play_list"></div>
+		<button type="button" id="button_next">Next</button>
+		<button type="button" id="button_previous">Previous</button>
+		<button type="button" id="button_goto">Goto</button>
+		<input type="number" id="input_goto" />
+	</div>
+</body>
+<!-- <script src="..\ts\index.ts"></script> -->
+<script data-main="dist/config.js" src="node_modules/requirejs/require.js"></script>
+<script src="dist/config.js"></script>
+</html>

@@ -3,7 +3,7 @@
 }
 
 #play_list {
-    width = 500px;
+    width: 500px;
     min-height: 100px;
     background-color: rgba(0,0,0,70%);
     color: white;

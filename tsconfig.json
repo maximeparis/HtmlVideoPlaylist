@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "outDir": "./dist",
+        "target": "es5",
+        "module": "amd",
+        "moduleResolution": "node",
+        "sourceRoot": "./script",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noEmitOnError": true,
+        "strict": true
+    },
+    "include": [
+        "./script/**/*",
+    ],
+    "exclude": [
+        ".git",
+        "node_modules",
+        "./dist"
+    ]
+}

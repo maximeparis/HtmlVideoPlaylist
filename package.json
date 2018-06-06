@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@types/jquery": "^3.3.2",
+    "@types/requirejs": "^2.1.31",
+    "jquery": "^3.3.1",
+    "requirejs": "^2.3.5"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.1"
+  },
+  "name": "HtmlVideoPlaylist",
+  "version": "1.0.0",
+  "repository": "https://github.com/maximeparis/HtmlVideoPlaylist.git",
+  "author": "Maxime Paris <maxxdu45@gmail.com>",
+  "license": "MIT"
+}
