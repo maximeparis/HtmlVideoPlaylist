@@ -13,10 +13,14 @@ export class Playlist<T>{
 
 	Remove(item: T): void {
 		for (let i = 0; i < this.items.length; i++) {
+            const currentItem: T = this.items[i];
 			if (i == (this.items.length - 1) && this.cursorPosition == (this.items.length - 1)) {
 				this.SetPosition(this.cursorPosition - 1);
 			}
-			this.items.splice(i, 1);
+            if(currentItem == item){
+			    this.items.splice(i, 1);
+                break;
+            }
 		}
 	}
 
